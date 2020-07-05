@@ -1,0 +1,12 @@
+@base-url: "/";
+@view-port-width: 1440px;
+
+.vw(@prop, @value) {
+  @temp: @view-port-width * 0.01;
+  @{prop}: unit(@value/ @temp, vw);
+}
+
+.vw(@prop, @value, @parent-width) {
+  @temp: @parent-width * 0.01;
+  @{prop}: unit(@value/ @temp, vw);
+}

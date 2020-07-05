@@ -1,1 +1,77 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import './app/styles/color.less';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Roboto, Helvetica, sans-serif;
+}
+
+body {
+  min-width: 300px;
+}
+
+.linear-flex {
+  display: flex;
+
+  .right {
+    justify-self: right;
+    margin-left: auto;
+  }
+}
+
+.vertical-flex {
+  display: flex;
+  flex-direction: column;
+}
+
+.button {
+  align-items: center;
+  background: @primary-color;
+  border-radius: 4px;
+  color: white;
+  cursor: default;
+  display: flex;
+  font-size: 24px;
+  font-weight: bold;
+  justify-content: center;
+  min-height: 58px;
+  min-width: 235px;
+  padding: 10px;
+
+  &.disabled {
+    background: gray;
+  }
+
+  &:not(.disabled):hover {
+    cursor: pointer;
+    background: darken(@primary-color, 10%);
+  }
+
+}
+
+.card {
+  background: white;
+  border-radius: 4px;
+  box-shadow: 0 2px 11px 0 rgba(72, 72, 72, 0.5);
+  border: solid 1px #979797;
+}
+
+input[type="text"] {
+  border-radius: 4px;
+  border: solid 1px #979797;
+  max-width: 442px;
+  font-size: 16px;
+  outline: none;
+  padding: 20px;
+  width: calc(100% - 10px);
+}
+
+label {
+  font-size: 14px;
+}
+html, body { height: 100%; }
+
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

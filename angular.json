@@ -30,7 +30,12 @@
             "styles": [
               "src/styles.less"
             ],
-            "scripts": []
+            "scripts": [],
+            "allowedCommonJsDependencies": [
+              "socket.io-client",
+              "socket.io-parser",
+              "debug"
+            ]
           },
           "configurations": {
             "production": {
@@ -84,9 +89,7 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "tsconfig.app.json",
-              "tsconfig.spec.json",
-              "e2e/tsconfig.json"
+              "tsconfig.app.json"
             ],
             "exclude": [
               "**/node_modules/**"

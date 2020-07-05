@@ -1,0 +1,38 @@
+@import '../../styles/devices.less';
+@import '../../styles/mixin.less';
+
+.body {
+  align-items: center;
+  justify-content: center;
+  min-width: 100vw;
+  min-height: 100vh;
+  background-image: url('@{base-url}assets/bg_img/group-5@2x.jpg');
+  background-size: cover;
+  display: flex;
+
+  .center {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    @media @mobile {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .theme-img {
+      max-height: 50vh;
+      max-width: 80%;
+    }
+
+    .sign-in-btn {
+      width: 50%;
+
+      @media @mobile {
+        position: unset;
+        max-width: 300px;
+      }
+    }
+  }
+}
