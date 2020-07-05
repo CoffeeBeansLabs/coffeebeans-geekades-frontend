@@ -18,18 +18,17 @@ export class ApiService {
   }
 
   login(idToken: string) {
-    console.log(idToken);
-    return this.postReq('login', {
+    return this.postReq('authentication/login', {
       token: idToken
     });
   }
 
   logout() {
-    return this.postReq('logout', {});
+    return this.postReq('authentication/logout', {});
   }
 
   submit(answer: string) {
-    return this.postReq('submit', { name: answer });
+    return this.postReq('submission', { name: answer });
   }
 
   private postReq(url: string, param: object) {

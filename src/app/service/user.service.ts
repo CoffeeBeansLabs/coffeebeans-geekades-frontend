@@ -20,21 +20,19 @@ export class UserService {
 
     this.authService.authState.subscribe((user: SocialUser) => {
       if (user != null) {
-        console.log(user);
         this.apiService.login(user.idToken).subscribe((response: ApiResponse) => {
           if (response.success) {
             this.setUserToken(response.data.token);
           }
         });
       } else {
-        console.log('HERE!');
         this.deleteToken();
       }
     });
   }
 
   signIn() {
-    return this.authService.signIn(GoogleLoginProvider.PROVIDER_ID, { ux_mode: 'redirect' });
+    return this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
   }
 
   getToken() {
