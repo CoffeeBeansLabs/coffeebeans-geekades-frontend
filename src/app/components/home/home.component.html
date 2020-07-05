@@ -1,5 +1,8 @@
 <div class="linear-flex game">
   <aside class="left-panel">
+    <div class="banner">
+      <img class="logo-img" src="assets/logo.png" alt="">
+    </div>
     <div class="timer-container" *ngIf="gameState == GameState.Game">
       <h3>{{(roundEvent.last)?'Game Ends in' : 'Next clue will appear in'}}</h3>
       <div class="time-div">
