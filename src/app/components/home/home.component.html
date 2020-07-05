@@ -1,1 +1,86 @@
-<p>home works!</p>
+<div class="linear-flex game">
+  <aside class="left-panel">
+    <div class="timer-container" *ngIf="gameState == GameState.Game">
+      <h3>{{(roundEvent.last)?'Game Ends in' : 'Next clue will appear in'}}</h3>
+      <div class="time-div">
+        <div class="time-frame">
+          <p class="time-txt blue">{{minutes.toString().padStart(2, '0')}}</p>
+          <label>min</label>
+        </div>
+        <div class="time-frame">
+          <p class="time-txt yellow">{{seconds.toString().padStart(2, '0')}}</p>
+          <label>sec</label>
+        </div>
+      </div>
+    </div>
+    <div class="rules-div">
+      <h3><u>Rules</u></h3>
+      <ul>
+        <li>Only latest submission will be considered.</li>
+      </ul>
+    </div>
+    <div class="logout-div">
+      <div class="logout-desk" (click)="onLogoutClick()">Logout</div>
+      <div class="logout-mob" (click)="onLogoutClick()">
+        <img src="assets/logout.png" alt="logout">
+      </div>
+    </div>
+  </aside>
+  <div class="main">
+    <div class="white-overlay"></div>
+    <div class="game-content" *ngIf="gameState == GameState.Game">
+      <div class="hint-image">
+        <div class="card" [ngStyle]="{ 'background-image': 'url(' + roundEvent.img + ')'}">
+          <img src="{{roundEvent.img}}" alt="">
+        </div>
+      </div>
+
+      <div class="linear-flex submit-div">
+        <input type="text" class="guess-txt" [disabled]='chancesUsed >= 3' #answerTxt
+          (keyup.enter)="onSubmitClick(answerTxt)"
+          [placeholder]="(chancesUsed >= 3) ? 'Maximum limit reached.': 'Enter Your Guess'" />
+        <p>{{3-chancesUsed}} chances left</p>
+        <div class="button right" [ngClass]="{'disabled': chancesUsed >= 3 || isSubmitting}"
+          (click)="onSubmitClick(answerTxt)">
+          {{(isSubmitting)?'Sending...' : 'Submit'}}
+        </div>
+      </div>
+    </div>
+    <div class="result-content vertical-flex" *ngIf="gameState == GameState.Result">
+      <div class="answer-div vertical-flex ">
+        <div class="img-div card">
+          <img src="{{resultEvent.image}}" alt="">
+          <div class="answer">
+            {{resultEvent.answer}}
+          </div>
+        </div>
+      </div>
+      <div class="winner-div">
+        <img src="assets/result-bg/result_bg.png" alt=""
+          srcset="assets/result-bg/result_bg@2x.png, assets/result-bg/result_bg@3x.png">
+        <div class="winner-details">
+          <h3 *ngIf="resultEvent.winners.name">And the winner is</h3>
+          <h1>{{(resultEvent.winners.name != '')?resultEvent.winners.name: 'No winners'}}</h1>
+        </div>
+      </div>
+    </div>
+
+    <div class="msg-div" *ngIf="gameState == GameState.StartsIn">
+      <h2 class="message">{{(roundOrGame == 'GAME') ? 'Your game' : 'Next round'}} starts in
+        {{minutes.toString().padStart(2, '0')}}
+        : {{seconds.toString().padStart(2, '0')}}</h2>
+    </div>
+
+    <div class="msg-div" *ngIf="gameState == GameState.Loading">
+      <ng-container *ngIf="isForceClosed; else elseTemplate">
+        <h2 class="message">You're terminated from game</h2>
+      </ng-container>
+      <ng-template #elseTemplate>
+        <ngx-spinner bdOpacity=0.9 bdColor="rgba(51,51,51,0.62)" size="large" color="#ff7777" type="ball-grid-pulse"
+          [fullScreen]="false">
+          <p style="color: white"> Loading... </p>
+        </ngx-spinner>
+      </ng-template>
+    </div>
+  </div>
+</div>
